@@ -1,0 +1,94 @@
+[
+  {
+    "name": "model_name",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "model_type",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "date_created",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "horizon",
+    "type": "INT64",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "holiday_region",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "bigquery_dataset",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "min_usage_start_date",
+    "type": "DATE",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "max_usage_start_date",
+    "type": "DATE",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "duration_ms",
+    "type": "INT64",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "feature_info",
+    "type": "RECORD",
+    "mode": "REPEATED",
+    "fields": [
+        {
+          "name": "input",
+          "type": "STRING",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "min",
+          "type": "FLOAT64",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "max",
+          "type": "FLOAT64",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "median",
+          "type": "FLOAT64",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "stddev",
+          "type": "FLOAT64",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "category_count",
+          "type": "INT64",
+          "mode": "NULLABLE"
+        },
+        {
+          "name": "null_count",
+          "type": "INT64",
+          "mode": "NULLABLE"
+        }
+      ]
+  },
+  {
+    "name": "is_latest_model_version",
+    "type": "BOOL",
+    "mode": "NULLABLE"
+  }
+]

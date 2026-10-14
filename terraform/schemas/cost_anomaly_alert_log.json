@@ -1,0 +1,72 @@
+[
+  {
+    "name": "alert_log_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "project_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+   {
+    "name": "project_name",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "usage_start_date",
+    "type": "DATE",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "owner",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "email_alert_success",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "alert_suppressed",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "expected_spend",
+    "type": "NUMERIC",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "actual_cost",
+    "type": "NUMERIC",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "absolute_distance_from_threshold",
+    "type": "NUMERIC",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "absolute_percent_from_threshold",
+    "type": "NUMERIC",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "anomaly_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "most_likely_service",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "ai_recommendation",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  }
+]

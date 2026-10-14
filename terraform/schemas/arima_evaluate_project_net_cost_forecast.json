@@ -1,0 +1,97 @@
+[
+  {
+    "name": "model_name",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "date_created",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "project_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "ar_coefficients",
+    "type": "FLOAT",
+    "mode": "REPEATED"
+  },
+  {
+    "name": "ma_coefficients",
+    "type": "FLOAT",
+    "mode": "REPEATED"
+  },
+  {
+    "name": "intercept_or_drift",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "non_seasonal_p",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "non_seasonal_d",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "non_seasonal_q",
+    "type": "INTEGER",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "has_drift",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "log_likelihood",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "AIC",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "variance",
+    "type": "FLOAT",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "seasonal_periods",
+    "type": "STRING",
+    "mode": "REPEATED"
+  },
+  {
+    "name": "has_holiday_effect",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "has_spikes_and_dips",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "has_step_changes",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "error_message",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "is_latest_model_version",
+    "type": "BOOLEAN",
+    "mode": "NULLABLE"
+  }
+]

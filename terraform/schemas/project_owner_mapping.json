@@ -1,0 +1,20 @@
+[
+  {
+    "name": "project_id",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The unique GCP Project ID"
+  },
+  {
+    "name": "owner_email",
+    "type": "STRING",
+    "mode": "REQUIRED",
+    "description": "The email address of the project owner/recipient for alerts"
+  },
+  {
+    "name": "department_name",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "The name of the department associated with the project"
+  }
+]

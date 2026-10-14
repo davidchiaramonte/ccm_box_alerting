@@ -1,0 +1,32 @@
+[
+  {
+    "name": "model_name",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "model_type",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "date_created",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "horizon",
+    "type": "INT64",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "holiday_region",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "bigquery_dataset",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  }
+]

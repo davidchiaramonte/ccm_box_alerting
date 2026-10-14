@@ -1,0 +1,68 @@
+[
+  {
+    "name": "process_id",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "Process identifier - no parallel processing support, batch only"
+  },
+  {
+    "name": "process_name",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Name of the billing process"
+  },
+  {
+    "name": "process_start_time",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "Timestamp when the process started"
+  },
+  {
+    "name": "process_end_time",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE",
+    "description": "Timestamp when the process completed - only set if job completed successfully"
+  },
+  {
+    "name": "process_msg",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Process status or error message"
+  },
+  {
+    "name": "source_table",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Source table for raw GCP export partitioned by _PARTITIONTIME"
+  },
+  {
+    "name": "dest_table",
+    "type": "STRING",
+    "mode": "NULLABLE",
+    "description": "Destination table for repartitioned and flattened GCP export"
+  },
+  {
+    "name": "records_added",
+    "type": "INTEGER",
+    "mode": "NULLABLE",
+    "description": "Number of records added during the process"
+  },
+  {
+    "name": "max_source_date",
+    "type": "DATE",
+    "mode": "NULLABLE",
+    "description": "Used as the bookmark for incremental loads to the base table"
+  },
+  {
+    "name": "usage_dates_processed",
+    "type": "DATE",
+    "mode": "REPEATED",
+    "description": "Array of usage_start_time dates processed for downstream aggregates"
+  },
+  {
+    "name": "max_dest_date",
+    "type": "DATE",
+    "mode": "NULLABLE",
+    "description": "Maximum destination date - populated by the final step"
+  }
+]

@@ -1,0 +1,37 @@
+[
+  {
+    "name": "project_id",
+    "type": "STRING",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "setting_start_date",
+    "type": "DATE",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "setting_end_date",
+    "type": "DATE",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "absolute_percent_threshold",
+    "type": "FLOAT64",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "absolute_delta_threshold",
+    "type": "FLOAT64",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "max_cost_threshold",
+    "type": "FLOAT64",
+    "mode": "NULLABLE"
+  },
+  {
+    "name": "setting_creation_timestamp",
+    "type": "TIMESTAMP",
+    "mode": "NULLABLE"
+  }
+]
