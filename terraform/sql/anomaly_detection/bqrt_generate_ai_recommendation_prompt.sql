@@ -65,6 +65,29 @@ SELECT
 FROM
     daily_sku_costs
 ),
+%{ if enable_recommendations ~}
+-- Optional: active Google Cloud Recommender recommendations for this project
+-- (enabled via var.enable_recommendations_in_alerts; requires the CCM toolkit's vw_active_recommendations)
+active_recs AS (
+SELECT
+    STRING_AGG(
+    CONCAT(
+        recommendation_type, ' on ', IFNULL(resource_name, 'project'),
+        IF(estimated_monthly_savings IS NOT NULL, CONCAT(' (est. $', FORMAT('%.2f', estimated_monthly_savings), '/month)'), ''),
+        ' [', priority, ']: ', RTRIM(action, '.')
+    ),
+    '; '
+    ORDER BY IFNULL(estimated_monthly_savings, 0) DESC
+    LIMIT 5
+    ) AS rec_list
+FROM
+    `${active_recommendations_view}`
+WHERE
+    project_id = p_project_id
+    -- The prompt below tells Gemini not to suggest new CUD purchases, so exclude commitment recommendations
+    AND recommendation_type != 'GCE CUDs'
+),
+%{ endif ~}
 -- ============================================================================
 -- Step 4: Construct the final prompt
 -- ============================================================================
@@ -94,6 +117,13 @@ SELECT
         sku_cost_list_string
     ),
     '. Start with an explanation of which sku likely caused it and why it is most likely.',
+%{ if enable_recommendations ~}
+    IF((SELECT rec_list FROM active_recs) IS NOT NULL,
+       CONCAT(' Google Cloud Recommender currently lists these active recommendations for this project: ',
+              (SELECT rec_list FROM active_recs),
+              '. If any of them are relevant to the anomaly, use them as corrective actions and name the specific resource and estimated monthly savings.'),
+       ''),
+%{ endif ~}
     ' Given the services running on that project, provide a concise explanation of the anomaly,',
     ' along with a bulleted list of up to three tips on what could be done to prevent further unwanted overspending.',
     ' Do not suggest budget alerts as a possible solution to the cost anomaly.',

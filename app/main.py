@@ -24,6 +24,11 @@ PROJECT_ID_ENV     = os.getenv('PROJECT_ID', 'change-me-gcp-project')
 DATASET_ID_ENV     = os.getenv('DATASET_ID', 'anomaly_detection')
 CC_EMAILS_ENV      = os.getenv('CC_EMAILS', '') 
 GEMINI_MODEL_ENV   = os.getenv('GEMINI_MODEL_NAME', 'gemini-3.8-flash') 
+# Gemini 3.x "thinking" tokens count against max_output_tokens. Without a cap, thinking can consume
+# almost the entire output budget and truncate the alert text mid-sentence. 128 leaves ample room
+# for the ~150-word response. Set to -1 to let the model decide (dynamic thinking).
+GEMINI_THINKING_BUDGET_ENV = int(os.getenv('GEMINI_THINKING_BUDGET', '128'))
+GEMINI_MAX_OUTPUT_TOKENS_ENV = int(os.getenv('GEMINI_MAX_OUTPUT_TOKENS', '1000'))
 SMTP_SECRET_ID_ENV = os.getenv('SMTP_SECRET_ID') # Full secret manager path
 
 # --- Client & AI SDK Initializations ---
@@ -106,16 +111,23 @@ async def get_ai_recommendation(
                 model=GEMINI_MODEL_ENV,
                 contents=prompt,
                 config=types.GenerateContentConfig(
-                    max_output_tokens=1000,
+                    max_output_tokens=GEMINI_MAX_OUTPUT_TOKENS_ENV,
                     temperature=0.2,
                     top_p=0.8,
+                    thinking_config=types.ThinkingConfig(thinking_budget=GEMINI_THINKING_BUDGET_ENV),
                 ),
             )
+            if response.candidates and str(response.candidates[0].finish_reason).endswith("MAX_TOKENS"):
+                logging.warning(
+                    "Gemini response hit MAX_TOKENS (thinking_budget=%s, max_output_tokens=%s); alert text may be truncated.",
+                    GEMINI_THINKING_BUDGET_ENV, GEMINI_MAX_OUTPUT_TOKENS_ENV)
             return response.text
         except Exception:
+            # Legacy Vertex AI SDK fallback: no thinking-budget control, so allow a larger output
+            # budget to leave room for thinking tokens plus the response.
             response = await ai_model.generate_content_async(
                 [prompt],
-                generation_config={"max_output_tokens": 1000, "temperature": 0.2, "top_p": 0.8},
+                generation_config={"max_output_tokens": max(GEMINI_MAX_OUTPUT_TOKENS_ENV, 4000), "temperature": 0.2, "top_p": 0.8},
             )
             return response.text
     except Exception as e:

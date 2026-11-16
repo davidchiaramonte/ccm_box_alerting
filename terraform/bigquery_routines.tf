@@ -102,7 +102,9 @@ resource "google_bigquery_routine" "sp_generate_ai_recommendation_prompt" {
   language     = "SQL"
 
   definition_body = templatefile("${path.module}/sql/anomaly_detection/bqrt_generate_ai_recommendation_prompt.sql", {
-    union_gcp_billing_daily = "${local.project_id}.${local.gcp_billing_dataset_id}.gcp_billing_export_daily_summary"
+    union_gcp_billing_daily     = "${local.project_id}.${local.gcp_billing_dataset_id}.gcp_billing_export_daily_summary"
+    enable_recommendations      = var.enable_recommendations_in_alerts
+    active_recommendations_view = "${local.project_id}.${local.gcp_billing_dataset_id}.vw_active_recommendations"
   })
 
   description = "Table valued function that builds the engineering prompt for Vertex AI Gemini"

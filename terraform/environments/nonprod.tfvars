@@ -10,6 +10,8 @@ location                 = "US"
 deletion_protection      = false
 enable_dataform_repo     = false
 gemini_model_name        = "gemini-3.8-flash"
+gemini_thinking_budget   = 128   # Caps Gemini 3.x thinking tokens so alert text is not truncated (-1 = dynamic)
+enable_recommendations_in_alerts = false # true = add active Recommender recommendations to the alert prompt (needs CCM enable_recommendations)
 
 # Email / SMTP routing configurations
 cc_emails                = ""

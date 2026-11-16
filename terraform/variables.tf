@@ -43,6 +43,24 @@ variable "gemini_model_name" {
   default     = "gemini-3.8-flash"
 }
 
+variable "gemini_thinking_budget" {
+  description = "Max 'thinking' tokens for Gemini 3.x models. Thinking tokens count against gemini_max_output_tokens, so an uncapped budget can truncate alert text. Use -1 for dynamic thinking."
+  type        = number
+  default     = 128
+}
+
+variable "gemini_max_output_tokens" {
+  description = "Max output tokens (thinking + response) for the Gemini alert explanation"
+  type        = number
+  default     = 1000
+}
+
+variable "enable_recommendations_in_alerts" {
+  description = "Include each project's active Google Cloud Recommender recommendations in the Gemini alert prompt. Requires the CCM toolkit to run with enable_recommendations = true (creates vw_active_recommendations in the billing dataset)."
+  type        = bool
+  default     = false
+}
+
 variable "cc_emails" {
   description = "Comma-separated list of default email recipients to be CC'd on all alerts"
   type        = string

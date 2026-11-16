@@ -26,3 +26,7 @@ dataform_git_default_branch  = "toolkit-alert"
 dataform_git_host_public_key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl"
 
 dataform_workspace_name      = "ccm-toolkit-alert"
+
+# Gemini / recommendations
+gemini_thinking_budget   = 128   # Caps Gemini 3.x thinking tokens so alert text is not truncated (-1 = dynamic)
+enable_recommendations_in_alerts = false # true = add active Recommender recommendations to the alert prompt (needs CCM enable_recommendations)

@@ -46,6 +46,20 @@ resource "google_cloud_run_v2_service" "anomaly_alert" {
         name  = "GEMINI_MODEL_NAME"
         value = var.gemini_model_name # Parameterized Gemini Model
       }
+      env {
+        name  = "GEMINI_THINKING_BUDGET"
+        value = tostring(var.gemini_thinking_budget) # Caps thinking tokens so alert text is not truncated
+      }
+      env {
+        name  = "GEMINI_MAX_OUTPUT_TOKENS"
+        value = tostring(var.gemini_max_output_tokens)
+      }
+      # Changes whenever the container is rebuilt (code/requirements/Dockerfile edits), forcing Cloud Run
+      # to roll a new revision that pulls the fresh image even though the image tag (e.g. "latest") is unchanged.
+      env {
+        name  = "IMAGE_BUILD_ID"
+        value = null_resource.cloud_build_image.id
+      }
 
       # --- Re-instated SMTP Hardened Relays Injections ---
       env {

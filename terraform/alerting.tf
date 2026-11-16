@@ -24,6 +24,12 @@ resource "google_pubsub_subscription" "cloudrun_push" {
   # Extended ack deadline to allow container and AI procedures sufficient processing headroom
   ack_deadline_seconds = 60
 
+  # Never expire. Pub/Sub deletes subscriptions after 31 days of inactivity by default, and anomalies
+  # can be rare - an expired subscription silently drops every alert published afterwards.
+  expiration_policy {
+    ttl = ""
+  }
+
   push_config {
     # References the Cloud Run service defined in cloud_run.tf, targeting the /pubsub-email-alerts subscriber route
     push_endpoint = "${google_cloud_run_v2_service.anomaly_alert.uri}/pubsub-email-alerts"
